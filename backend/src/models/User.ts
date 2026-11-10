@@ -1,6 +1,6 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
-// 1. TypeScript Interface (Strict typing for Viva & Rubric)
+
 export interface IUser extends Document {
   name: string;
   email: string;
@@ -11,7 +11,7 @@ export interface IUser extends Document {
   updatedAt: Date;
 }
 
-// 2. Mongoose Schema
+
 const userSchema = new Schema<IUser>(
   {
     name: { type: String, required: true, trim: true },

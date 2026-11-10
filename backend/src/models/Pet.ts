@@ -1,20 +1,19 @@
 import mongoose, { Document, Schema, Types } from 'mongoose';
 
-// 1. TypeScript Interface
+
 export interface IPet extends Document {
-  owner: Types.ObjectId; // Relation to User
+  owner: Types.ObjectId; 
   name: string;
   species: 'Dog' | 'Cat' | 'Bird' | 'Other';
   breed: string;
-  age: number; // in years
-  weight: number; // in kg
+  age: number; 
+  weight: number; 
   gender: 'Male' | 'Female';
   medicalHistory: string[];
   createdAt: Date;
   updatedAt: Date;
 }
 
-// 2. Mongoose Schema with Relationship
 const petSchema = new Schema<IPet>(
   {
     owner: { type: Schema.Types.ObjectId, ref: 'User', required: true },
