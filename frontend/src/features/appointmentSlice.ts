@@ -55,6 +55,19 @@ export const updateAppointmentStatus = createAsyncThunk(
   }
 );
 
+export const deleteAppointment = createAsyncThunk(
+  'appointments/deleteAppointment',
+  async (id: string, thunkAPI) => {
+    try {
+      await API.delete(`/appointments/${id}`);
+      return id;
+    } catch (error: any) {
+      const message = error.response?.data?.message || error.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 const appointmentSlice = createSlice({
   name: 'appointments',
   initialState,
@@ -81,6 +94,9 @@ const appointmentSlice = createSlice({
         if (index !== -1) {
           state.appointments[index] = action.payload;
         }
+      })
+      .addCase(deleteAppointment.fulfilled, (state, action: PayloadAction<string>) => {
+        state.appointments = state.appointments.filter((a) => a._id !== action.payload);
       });
   },
 });
