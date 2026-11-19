@@ -27,17 +27,30 @@ export const Login: React.FC = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-5rem)] bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full bg-slate-900/80 border border-slate-800 p-8 sm:p-10 rounded-3xl shadow-2xl backdrop-blur-xl">
+    <div className="min-h-[calc(100vh-5rem)] bg-slate-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(20,184,166,0.18),rgba(255,255,255,0))] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full bg-slate-900/75 border border-slate-800/90 p-8 sm:p-10 rounded-3xl shadow-[0_0_50px_-12px_rgba(20,184,166,0.18)] backdrop-blur-2xl">
         <div className="text-center mb-8">
-          <span className="text-xs font-semibold tracking-widest text-teal-400 uppercase bg-teal-500/10 px-3 py-1 rounded-full border border-teal-500/20">
-            Secure Access
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-teal-500 to-emerald-400 mx-auto flex items-center justify-center shadow-lg shadow-teal-500/25 mb-4">
+            <svg
+              className="w-7 h-7 text-slate-950"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <ellipse cx="12" cy="17" rx="3.5" ry="2.8" />
+              <ellipse cx="6" cy="11" rx="1.8" ry="2.5" transform="rotate(-15 6 11)" />
+              <ellipse cx="18" cy="11" rx="1.8" ry="2.5" transform="rotate(15 18 11)" />
+              <circle cx="9.5" cy="7" r="1.8" />
+              <circle cx="14.5" cy="7" r="1.8" />
+            </svg>
+          </div>
+          <span className="inline-block bg-teal-500/10 text-teal-300 border border-teal-500/30 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+            Secure Portal
           </span>
-          <h2 className="text-3xl font-extrabold text-white tracking-tight mt-4">
+          <h2 className="text-3xl font-black text-white tracking-tight mt-3">
             Welcome Back
           </h2>
-          <p className="text-slate-400 text-sm mt-2">
-            Access your pet care records and appointments.
+          <p className="text-slate-400 text-sm mt-1.5">
+            Sign in to access your pet care workspace
           </p>
         </div>
 
@@ -49,7 +62,7 @@ export const Login: React.FC = () => {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+            <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1.5">
               Email Address
             </label>
             <input
@@ -58,12 +71,12 @@ export const Login: React.FC = () => {
               placeholder="name@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full bg-slate-800/60 border border-slate-700/80 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent transition"
+              className="w-full bg-slate-800/80 border border-slate-700 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent transition"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+            <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1.5">
               Password
             </label>
             <input
@@ -72,22 +85,22 @@ export const Login: React.FC = () => {
               placeholder="Enter password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full bg-slate-800/60 border border-slate-700/80 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent transition"
+              className="w-full bg-slate-800/80 border border-slate-700 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent transition"
             />
           </div>
 
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full mt-2 bg-gradient-to-r from-teal-500 to-emerald-400 hover:from-teal-400 hover:to-emerald-300 text-slate-950 font-bold py-3.5 rounded-xl shadow-lg shadow-teal-500/20 transition duration-200 disabled:opacity-50"
+            className="w-full mt-2 bg-gradient-to-r from-teal-500 to-emerald-400 hover:from-teal-400 hover:to-emerald-300 text-slate-950 font-extrabold py-3.5 rounded-xl shadow-lg shadow-teal-500/25 transition duration-200 disabled:opacity-50"
           >
-            {isLoading ? 'Authenticating...' : 'Sign In to Portal'}
+            {isLoading ? 'Signing In...' : 'Sign In to Portal'}
           </button>
         </form>
 
         <p className="mt-8 text-center text-sm text-slate-400">
           Need an account?{' '}
-          <Link to="/register" className="text-teal-400 font-semibold hover:underline">
+          <Link to="/register" className="text-teal-400 font-bold hover:underline">
             Register here
           </Link>
         </p>

@@ -33,7 +33,11 @@ export const createAppointment = async (req: AuthRequest, res: Response): Promis
       status: 'pending',
     });
 
-    res.status(201).json(appointment);
+    const populatedAppointment = await Appointment.findById(appointment._id)
+      .populate('pet', 'name species breed age weight')
+      .populate('owner', 'name email phone');
+
+    res.status(201).json(populatedAppointment);
   } catch (error) {
     res.status(500).json({ message: (error as Error).message });
   }
@@ -49,8 +53,8 @@ export const getMyAppointments = async (req: AuthRequest, res: Response): Promis
     let filter = {};
     if (req.user.role === 'owner') {
       filter = { owner: req.user._id };
-    } else if (req.user.role === 'vet') {
-      filter = { $or: [{ vet: req.user._id }, { vet: null }] };
+    } else if (req.user.role === 'vet' || req.user.role === 'admin') {
+      filter = {};
     }
 
     const appointments = await Appointment.find(filter)
@@ -95,7 +99,9 @@ export const updateAppointmentStatus = async (req: AuthRequest, res: Response): 
 
     if (status) appointment.status = status;
     if (vetNotes) appointment.vetNotes = vetNotes;
-    if (req.user && req.user.role === 'vet') appointment.vet = req.user._id;
+    if (req.user && (req.user.role === 'vet' || req.user.role === 'admin')) {
+      appointment.vet = req.user._id;
+    }
 
     const updated = await appointment.save();
     res.status(200).json(updated);
